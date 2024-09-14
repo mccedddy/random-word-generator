@@ -1,0 +1,126 @@
+html,
+body {
+  height: 100dvh;
+  margin: 0;
+  width: 100dvw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Arial", sans-serif;
+
+  background: radial-gradient(
+        circle farthest-side at 0% 50%,
+        #1e2129 23.5%,
+        #0000 0
+      )
+      33.6px 48px,
+    radial-gradient(circle farthest-side at 0% 50%, #292c37 24%, #0000 0) 30.4px
+      48px,
+    linear-gradient(#1e2129 14%, #0000 0, #0000 85%, #1e2129 0) 0 0,
+    linear-gradient(
+        150deg,
+        #1e2129 24%,
+        #292c37 0,
+        #292c37 26%,
+        #0000 0,
+        #0000 74%,
+        #292c37 0,
+        #292c37 76%,
+        #1e2129 0
+      )
+      0 0,
+    linear-gradient(
+        30deg,
+        #1e2129 24%,
+        #292c37 0,
+        #292c37 26%,
+        #0000 0,
+        #0000 74%,
+        #292c37 0,
+        #292c37 76%,
+        #1e2129 0
+      )
+      0 0,
+    linear-gradient(90deg, #292c37 2%, #1e2129 0, #1e2129 98%, #292c37 0%) 0 0
+      #1e2129;
+  background-size: 64px 96px;
+  background-color: #1e2129;
+}
+
+.main {
+  padding: 10px 30px 10px 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: box-shadow 0.3s ease;
+  background: #292c34;
+}
+
+.container {
+  background-color: #404757;
+  padding: 20px 0px 20px 0px;
+  border-radius: 5px;
+  width: 100%;
+  margin: 10px;
+}
+
+.messageContainer {
+  height: 20px;
+  margin-top: 5px;
+}
+
+h1,
+h2,
+#message {
+  color: #ced3de;
+}
+
+#message {
+  font-size: 14px;
+  margin: 0;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+button {
+  background-color: #00acc1;
+  color: #edeff4;
+  padding: 5px 10px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  outline: none;
+}
+
+button:hover {
+  background-color: #00899b;
+  transform: translateY(-2px);
+}
+
+button:active {
+  background-color: #006572;
+  transform: translateY(1px);
+}
+
+@media (max-width: 600px) {
+  .main {
+    width: 70%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+}
