@@ -6,76 +6,41 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Arial", sans-serif;
-
-  background: radial-gradient(
-        circle farthest-side at 0% 50%,
-        #1e2129 23.5%,
-        #0000 0
-      )
-      33.6px 48px,
-    radial-gradient(circle farthest-side at 0% 50%, #292c37 24%, #0000 0) 30.4px
-      48px,
-    linear-gradient(#1e2129 14%, #0000 0, #0000 85%, #1e2129 0) 0 0,
-    linear-gradient(
-        150deg,
-        #1e2129 24%,
-        #292c37 0,
-        #292c37 26%,
-        #0000 0,
-        #0000 74%,
-        #292c37 0,
-        #292c37 76%,
-        #1e2129 0
-      )
-      0 0,
-    linear-gradient(
-        30deg,
-        #1e2129 24%,
-        #292c37 0,
-        #292c37 26%,
-        #0000 0,
-        #0000 74%,
-        #292c37 0,
-        #292c37 76%,
-        #1e2129 0
-      )
-      0 0,
-    linear-gradient(90deg, #292c37 2%, #1e2129 0, #1e2129 98%, #292c37 0%) 0 0
-      #1e2129;
-  background-size: 64px 96px;
-  background-color: #1e2129;
-}
-
-.main {
-  padding: 10px 30px 15px 30px;
-  border-radius: 8px;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: box-shadow 0.3s ease;
-  background: #292c34;
+  font-family: "Outfit", "Arial", sans-serif;
+  background-color: #0f0d0e;
 }
 
 .container {
-  background-color: #404757;
-  padding: 20px 0px 0px 0px;
-  border-radius: 5px;
-  width: 100%;
-  margin-bottom: 10px;
+  background-color: #ed203d;
+  padding: 10px 25px 15px 25px;
+  border-radius: 10px;
+  width: 250px;
+  min-height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 10px 10px 0 #231f20;
+  border: 2px solid #0f0d0e;
+}
+
+.mid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .messageContainer {
   height: 20px;
+  text-align: center;
 }
 
 h1,
 h2,
+p,
 #message {
-  color: #ced3de;
+  color: #0f0d0e;
+  padding: 0px;
+  margin: 0px;
 }
 
 #message {
@@ -84,47 +49,33 @@ h2,
 }
 
 h1 {
-  font-size: 36px;
-  white-space: nowrap;
+  font-size: 28px;
+  font-family: "Paytone One", "Outfit", "Arial", sans-serif;
 }
 
 h2 {
   margin: 15px 0px 20px 0px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 button {
-  background-color: #00acc1;
-  color: #edeff4;
+  background-color: #fcba28;
+  color: #0f0d0e;
   padding: 5px 10px;
   margin: 7px 0px 5px 0px;
-  border: none;
+  border: 2px solid #0f0d0e;
   cursor: pointer;
   font-size: 18px;
-  border-radius: 5px;
+  border-radius: 50px;
   transition: background-color 0.3s ease, transform 0.2s ease;
   outline: none;
-}
-
-button:hover {
-  background-color: #00899b;
-  transform: translateY(-2px);
-}
-
-button:active {
-  background-color: #006572;
-  transform: translateY(1px);
+  width: 100%;
+  height: 40px;
+  font-family: "Outfit";
+  font-size: 15px;
+  font-weight: 900;
 }
 
 @media (max-width: 600px) {
-  .main {
-    width: 70%;
-  }
-
-  h1 {
-    font-size: 24px;
-  }
-
-  h2 {
-    font-size: 18px;
-  }
 }

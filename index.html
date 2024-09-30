@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Random Word Generator</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;900&family=Paytone+One&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="main">
-      <h2>Random Word Generator</h2>
-      <div class="container">
-        <h1 id="word">Random</h1>
+    <div class="container" id="card">
+      <div class="top">
+        <h2>Random Word Generator</h2>
+      </div>
+
+      <div class="mid">
+        <h1 id="word"></h1>
+        <p id="partOfSpeech"></p>
+        <p id="definition"></p>
+      </div>
+
+      <div class="bot">
         <div class="messageContainer">
           <p id="message"></p>
         </div>
+        <button id="generate">GENERATE</button>
       </div>
-      <button id="generate">Generate</button>
     </div>
 
     <script src="script.js"></script>

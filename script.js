@@ -1,142 +1,99 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const generate = document.getElementById("generate");
+  const generateButton = document.getElementById("generate");
   const word = document.getElementById("word");
   const message = document.getElementById("message");
+  const definition = document.getElementById("definition");
+  const partOfSpeech = document.getElementById("partOfSpeech");
+  const card = document.getElementById("card");
 
   // Event listener
-  generate.addEventListener("click", () => {
+  generateButton.addEventListener("click", () => {
     generateRandomWord();
   });
 
-  // Array of random words
-  const randomWords = [
-    "apple",
-    "banana",
-    "cat",
-    "dog",
-    "elephant",
-    "flower",
-    "giraffe",
-    "house",
-    "igloo",
-    "jacket",
-    "kangaroo",
-    "lemon",
-    "mountain",
-    "notebook",
-    "ocean",
-    "pizza",
-    "queen",
-    "rainbow",
-    "sunshine",
-    "turtle",
-    "umbrella",
-    "violin",
-    "whale",
-    "xylophone",
-    "yacht",
-    "zebra",
-    "ant",
-    "balloon",
-    "carrot",
-    "drum",
-    "eagle",
-    "fox",
-    "grape",
-    "hat",
-    "island",
-    "jelly",
-    "kite",
-    "lamp",
-    "moon",
-    "nest",
-    "orange",
-    "penguin",
-    "quilt",
-    "rocket",
-    "star",
-    "tree",
-    "unicorn",
-    "vase",
-    "waterfall",
-    "x-ray",
-    "yellow",
-    "zoo",
-    "avocado",
-    "butterfly",
-    "camera",
-    "diamond",
-    "engine",
-    "feather",
-    "glasses",
-    "honey",
-    "iceberg",
-    "jungle",
-    "key",
-    "lighthouse",
-    "mirror",
-    "necklace",
-    "octopus",
-    "pencil",
-    "quicksand",
-    "river",
-    "snowflake",
-    "train",
-    "vulture",
-    "watermelon",
-    "xenon",
-    "yoyo",
-    "zipper",
-    "airplane",
-    "bicycle",
-    "chocolate",
-    "desert",
-    "envelope",
-    "fountain",
-    "guitar",
-    "helmet",
-    "iguanodon",
-    "joker",
-    "kettle",
-  ];
+  document.addEventListener("keydown", (event) => {
+    if (event.code === "Space") {
+      generateRandomWord();
+    }
+  });
+
+  function changeColors() {
+    const colors = [
+      "#ed203d", // red
+      "#0ba95b", // green
+      "#f9f4da", // light yellow
+      "#12b5e5", // blue
+      "#fc7428", // orange
+      "#f38ba3", // pink
+      "#fcba28", // yellow
+    ];
+
+    const cardColorIndex = Math.floor(Math.random() * colors.length);
+    const cardColor = colors[cardColorIndex];
+
+    let buttonColorIndex;
+    do {
+      buttonColorIndex = Math.floor(Math.random() * colors.length);
+    } while (buttonColorIndex === cardColorIndex);
+
+    const buttonColor = colors[buttonColorIndex];
+
+    card.style.backgroundColor = cardColor;
+    generateButton.style.backgroundColor = buttonColor;
+  }
 
   function generateRandomWord() {
     // Disable the generate button while fetching
     generate.disabled = true;
+    word.innerHTML = "";
+    definition.innerHTML = "";
+    partOfSpeech.innerHTML = "";
 
     fetch("https://random-word-api.herokuapp.com/word")
       .then((response) => response.json())
       .then((data) => {
         const generatedWord = data[0];
-        word.innerHTML = generatedWord;
 
-        // Copy to clipboard
-        navigator.clipboard.writeText(generatedWord).then(() => {
-          message.innerHTML = "Copied to clipboard!";
+        // Fetch the definition of the word
+        fetch(
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${generatedWord}`
+        )
+          .then((response) => response.json())
+          .then((definitionData) => {
+            if (
+              definitionData[0] &&
+              definitionData[0].meanings &&
+              definitionData[0].meanings.length > 0
+            ) {
+              const firstMeaning = definitionData[0].meanings[0];
+              const firstDefinition = firstMeaning.definitions[0].definition;
+              const firstPartOfSpeech = firstMeaning.partOfSpeech;
+              definition.innerHTML = firstDefinition;
+              partOfSpeech.innerHTML = firstPartOfSpeech;
+            } else {
+              definition.innerHTML = "";
+              partOfSpeech.innerHTML = "";
+            }
+            word.innerHTML = generatedWord;
+            changeColors();
 
-          setTimeout(() => {
-            message.innerHTML = "";
-          }, 1000);
-        });
+            // Copy to clipboard
+            navigator.clipboard.writeText(generatedWord).then(() => {
+              message.innerHTML = "Copied to clipboard!";
+
+              setTimeout(() => {
+                message.innerHTML = "";
+              }, 1000);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching definition:", error);
+            definition.innerHTML = "Error fetching definition.";
+          });
       })
       .catch((error) => {
         console.error("Error fetching word:", error);
-
-        // Fallback: Select 2 random words from the array if API fails
-        const randomIndex1 = Math.floor(Math.random() * randomWords.length);
-        const randomIndex2 = Math.floor(Math.random() * randomWords.length);
-
-        const generatedWord = `${randomWords[randomIndex1]} ${randomWords[randomIndex2]}`;
-        word.innerHTML = generatedWord;
-
-        // Copy to clipboard
-        navigator.clipboard.writeText(generatedWord).then(() => {
-          message.innerHTML = "Copied to clipboard!";
-
-          setTimeout(() => {
-            message.innerHTML = "";
-          }, 1000);
-        });
+        word.innerHTML = "Error fetching word.";
       })
       .finally(() => {
         generate.disabled = false;
