@@ -85,7 +85,6 @@ button {
   display: flex;
   width: 100%;
   justify-content: center;
-  padding-bottom: 20px;
 }
 
 #loader {
