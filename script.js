@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     word.innerHTML = "";
     definition.innerHTML = "";
     partOfSpeech.innerHTML = "";
+    message.innerHTML = "Generating...";
 
     fetch("https://random-word-api.herokuapp.com/word")
       .then((response) => response.json())

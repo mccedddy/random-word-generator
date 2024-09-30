@@ -7,6 +7,10 @@ body {
   justify-content: center;
   align-items: center;
   font-family: "Outfit", "Arial", sans-serif;
+  background-image: radial-gradient(#191919 2px, transparent 2px),
+    radial-gradient(#191919 2px, transparent 2px);
+  background-size: 13px 13px;
+  background-position: 0 0, 6.5px 6.5px;
   background-color: #0f0d0e;
 }
 
@@ -81,6 +85,7 @@ button {
   display: flex;
   width: 100%;
   justify-content: center;
+  padding-bottom: 20px;
 }
 
 #loader {
