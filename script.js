@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const definition = document.getElementById("definition");
   const partOfSpeech = document.getElementById("partOfSpeech");
   const card = document.getElementById("card");
+  const loader = document.getElementById("loader");
 
   // Event listener
   generateButton.addEventListener("click", () => {
@@ -44,6 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function generateRandomWord() {
     // Disable the generate button while fetching
+    loader.style.display = "block";
     generate.disabled = true;
     word.innerHTML = "";
     definition.innerHTML = "";
@@ -97,6 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .finally(() => {
         generate.disabled = false;
+        loader.style.display = "none";
       });
   }
 });
