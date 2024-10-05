@@ -14,17 +14,23 @@ body {
   background-color: #0f0d0e;
 }
 
+.border {
+  border: 10px solid #f9f4da;
+  background-color: #f9f4da;
+  box-shadow: 10px 10px 0 #231f20;
+  border-radius: 15px;
+}
+
 .container {
   background-color: #ed203d;
-  padding: 10px 25px 15px 25px;
+  padding: 0px 15px 15px 15px;
   border-radius: 10px;
   width: 250px;
-  min-height: 350px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 10px 10px 0 #231f20;
-  border: 2px solid #0f0d0e;
+  flex-shrink: 1;
 }
 
 .mid {
@@ -34,7 +40,7 @@ body {
 }
 
 .messageContainer {
-  height: 20px;
+  height: 30px;
   text-align: center;
 }
 
@@ -42,33 +48,45 @@ h1,
 h2,
 p,
 #message {
-  color: #0f0d0e;
+  color: #f9f4da;
+  font-size: 14px;
   padding: 0px;
   margin: 0px;
-}
-
-#message {
-  font-size: 14px;
-  margin: 0;
+  text-shadow: 0px 1px 0 #0f0d0e, 0px -1px 0 #0f0d0e, -1px 0px 0 #0f0d0e,
+    1px 0px 0 #0f0d0e;
+  font-weight: 600;
 }
 
 h1 {
   font-size: 28px;
   font-family: "Paytone One", "Outfit", "Arial", sans-serif;
+  text-shadow: 0px 1px 0 #0f0d0e, 0px -1px 0 #0f0d0e, -1px 0px 0 #0f0d0e,
+    1px 0px 0 #0f0d0e, 1px 1px 0 #0f0d0e, -1px -1px 0 #0f0d0e,
+    1px -1px 0 #0f0d0e, -1px 1px 0 #0f0d0e, 4px 4px 0 #0f0d0e;
+  white-space: wrap;
+  word-break: break-all;
 }
 
 h2 {
   margin: 15px 0px 20px 0px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
+  text-shadow: 0px 1px 0 #0f0d0e, 0px -1px 0 #0f0d0e, -1px 0px 0 #0f0d0e,
+    1px 0px 0 #0f0d0e, 2px 2px 0 #0f0d0e;
+}
+
+p {
+  word-wrap: break-word;
+  word-break: break-word;
+  text-wrap: wrap;
+  max-width: 100%;
 }
 
 button {
-  background-color: #fcba28;
+  background-color: #f9f4da;
   color: #0f0d0e;
   padding: 5px 10px;
   margin: 7px 0px 5px 0px;
-  border: 2px solid #0f0d0e;
+  border: 2px solid #f9f4da;
   cursor: pointer;
   font-size: 18px;
   border-radius: 50px;
@@ -79,6 +97,19 @@ button {
   font-family: "Outfit";
   font-size: 15px;
   font-weight: 900;
+  box-shadow: 0px 1px 0 #0f0d0e, 0px -1px 0 #0f0d0e, -1px 0px 0 #0f0d0e,
+    1px 0px 0 #0f0d0e, 1px 1px 0 #0f0d0e, -1px -1px 0 #0f0d0e,
+    1px -1px 0 #0f0d0e, -1px 1px 0 #0f0d0e, 4px 4px 0 #0f0d0e;
+}
+
+button:active {
+  transform: translate(0px, 4px);
+  animation: ease-in-out;
+}
+
+button.active {
+  transform: translate(0px, 4px);
+  animation: ease-in-out;
 }
 
 .loaderContainer {
@@ -92,8 +123,9 @@ button {
   aspect-ratio: 1;
   border-radius: 50%;
   border: 8px solid;
-  border-color: #000 #0000;
+  border-color: #f9f4da #0000;
   animation: l1 1s infinite;
+  margin-bottom: 40px;
 }
 @keyframes l1 {
   to {

@@ -14,33 +14,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
+      generateButton.classList.add("active");
       generateRandomWord();
+      setTimeout(() => {
+        generateButton.classList.remove("active");
+      }, 100);
     }
   });
 
   function changeColors() {
-    const colors = [
-      "#ed203d", // red
-      "#0ba95b", // green
-      "#f9f4da", // light yellow
-      "#12b5e5", // blue
-      "#fc7428", // orange
-      "#f38ba3", // pink
-      "#fcba28", // yellow
-    ];
+    const colors = ["#0266cd", "#e51421", "#dacf00", "#017802"];
 
     const cardColorIndex = Math.floor(Math.random() * colors.length);
     const cardColor = colors[cardColorIndex];
 
-    let buttonColorIndex;
-    do {
-      buttonColorIndex = Math.floor(Math.random() * colors.length);
-    } while (buttonColorIndex === cardColorIndex);
-
-    const buttonColor = colors[buttonColorIndex];
-
     card.style.backgroundColor = cardColor;
-    generateButton.style.backgroundColor = buttonColor;
   }
 
   function generateRandomWord() {
