@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
-      flipCard();
       generateButton.classList.add("active");
       generateRandomWord();
       setTimeout(() => {
@@ -37,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function generateRandomWord() {
-    // Disable the generate button while fetching
+    flipCard();
     generate.disabled = true;
     word.innerHTML = "";
     definition.innerHTML = "";
