@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const definition = document.getElementById("definition");
   const partOfSpeech = document.getElementById("partOfSpeech");
   const card = document.getElementById("card");
-  const loader = document.getElementById("loader");
 
   // Event listener
   generateButton.addEventListener("click", () => {
@@ -14,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
+      flipCard();
       generateButton.classList.add("active");
       generateRandomWord();
       setTimeout(() => {
@@ -21,6 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 100);
     }
   });
+
+  function flipCard() {
+    const flipContainer = document.getElementById("flipContainer");
+    flipContainer.classList.toggle("flip");
+  }
 
   function changeColors() {
     const colors = ["#0266cd", "#e51421", "#dacf00", "#017802"];
@@ -33,12 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function generateRandomWord() {
     // Disable the generate button while fetching
-    loader.style.display = "block";
     generate.disabled = true;
     word.innerHTML = "";
     definition.innerHTML = "";
     partOfSpeech.innerHTML = "";
-    message.innerHTML = "Generating...";
 
     fetch("https://random-word-api.herokuapp.com/word")
       .then((response) => response.json())
@@ -67,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             word.innerHTML = generatedWord;
             changeColors();
+            flipCard();
 
             // Copy to clipboard
             navigator.clipboard.writeText(generatedWord).then(() => {
@@ -79,16 +83,19 @@ document.addEventListener("DOMContentLoaded", () => {
           })
           .catch((error) => {
             console.error("Error fetching definition:", error);
+            word.innerHTML = "An error occured!";
             definition.innerHTML = "Error fetching definition.";
+            flipCard();
           });
       })
       .catch((error) => {
         console.error("Error fetching word:", error);
-        word.innerHTML = "Error fetching word.";
+        word.innerHTML = "An error occured!";
+        definition.innerHTML = "Error fetching word.";
+        flipCard();
       })
       .finally(() => {
         generate.disabled = false;
-        loader.style.display = "none";
       });
   }
 });

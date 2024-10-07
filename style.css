@@ -14,15 +14,58 @@ body {
   background-color: #0f0d0e;
 }
 
+/* Wrapper to handle the 3D perspective */
+.flip-container {
+  perspective: 1000px;
+  width: 300px;
+  height: 435px;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+  width: 350px;
+}
+
+/* Flip the card when this class is added */
+.flip-container.flip .card {
+  transform: rotateY(180deg);
+}
+
+/* Front and back sides */
+.front,
+.back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.front {
+  z-index: 2;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
 .border {
   border: 10px solid #f9f4da;
   background-color: #f9f4da;
-  box-shadow: 10px 10px 0 #231f20;
   border-radius: 15px;
+  width: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
-  background-color: #ed203d;
+  background-color: #e51421;
   padding: 0px 15px 15px 15px;
   border-radius: 10px;
   width: 250px;
@@ -33,10 +76,21 @@ body {
   flex-shrink: 1;
 }
 
+.container-back {
+  background-color: #232323;
+}
+
 .mid {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.container-back .mid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .messageContainer {
@@ -47,6 +101,7 @@ body {
 h1,
 h2,
 p,
+a,
 #message {
   color: #f9f4da;
   font-size: 14px;
@@ -55,6 +110,7 @@ p,
   text-shadow: 0px 1px 0 #0f0d0e, 0px -1px 0 #0f0d0e, -1px 0px 0 #0f0d0e,
     1px 0px 0 #0f0d0e;
   font-weight: 600;
+  text-decoration: none;
 }
 
 h1 {
@@ -79,6 +135,11 @@ p {
   word-break: break-word;
   text-wrap: wrap;
   max-width: 100%;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 button {
@@ -125,7 +186,6 @@ button.active {
   border: 8px solid;
   border-color: #f9f4da #0000;
   animation: l1 1s infinite;
-  margin-bottom: 40px;
 }
 @keyframes l1 {
   to {

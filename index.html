@@ -12,26 +12,51 @@
     <link rel="icon" href="favicon.png" type="image/png" />
   </head>
   <body>
-    <div class="border">
-      <div class="container" id="card">
-        <div class="top">
-          <h2>Random Word Generator</h2>
-        </div>
-
-        <div class="mid">
-          <h1 id="word">Random</h1>
-          <p id="partOfSpeech"></p>
-          <p id="definition"></p>
-          <div class="loaderContainer">
-            <div id="loader" style="display: none"></div>
+    <div class="flip-container" id="flipContainer">
+      <div class="card">
+        <div class="front">
+          <div class="border">
+            <div class="container" id="card">
+              <div class="top">
+                <h2>Random Word Generator</h2>
+              </div>
+              <div class="mid">
+                <h1 id="word">Random</h1>
+                <p id="partOfSpeech"></p>
+                <p id="definition"></p>
+              </div>
+              <div class="bot">
+                <div class="messageContainer">
+                  <p id="message"></p>
+                </div>
+                <button id="generate">GENERATE</button>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="bot">
-          <div class="messageContainer">
-            <p id="message"></p>
+        <div class="back">
+          <div class="border">
+            <div class="container container-back">
+              <div class="top">
+                <h2>Random Word Generator</h2>
+              </div>
+              <div class="mid">
+                <div class="loaderContainer">
+                  <div id="loader"></div>
+                </div>
+                <h2>Generating...</h2>
+              </div>
+              <div class="bot">
+                <a
+                  href="https://github.com/mccedddy/"
+                  rel="noopener"
+                  target="_blank"
+                  >github.com/mccedddy</a
+                >
+              </div>
+            </div>
           </div>
-          <button id="generate">GENERATE</button>
         </div>
       </div>
     </div>
