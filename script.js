@@ -9,14 +9,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Event listener
   generateButton.addEventListener("click", () => {
     flipCard();
-    generateRandomWord();
+    // generateRandomWord();
+    generateFallbackWord();
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
       flipCard();
       generateButton.classList.add("active");
-      generateRandomWord();
+      // generateRandomWord();
+      generateFallbackWord();
       setTimeout(() => {
         generateButton.classList.remove("active");
       }, 100);
@@ -97,5 +99,62 @@ document.addEventListener("DOMContentLoaded", () => {
       .finally(() => {
         generate.disabled = false;
       });
+  }
+
+  function generateFallbackWord() {
+    const prefixes = [
+      "bio",
+      "cyber",
+      "eco",
+      "geo",
+      "micro",
+      "nano",
+      "tele",
+      "ultra",
+      "anti",
+      "auto",
+      "hyper",
+      "inter",
+      "multi",
+      "pseudo",
+      "sub",
+      "trans",
+      "super",
+    ];
+
+    const suffixes = [
+      "scope",
+      "logy",
+      "graph",
+      "phobia",
+      "nomy",
+      "genic",
+      "philia",
+      "cracy",
+      "itis",
+      "ism",
+      "ment",
+      "tion",
+      "ship",
+      "ity",
+      "ous",
+    ];
+
+    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+    const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+    const newWord = prefix + suffix;
+
+    word.innerHTML = newWord;
+    changeColors();
+    flipCard();
+
+    // Copy to clipboard
+    navigator.clipboard.writeText(newWord).then(() => {
+      message.innerHTML = "Copied to clipboard!";
+
+      setTimeout(() => {
+        message.innerHTML = "";
+      }, 1000);
+    });
   }
 });
