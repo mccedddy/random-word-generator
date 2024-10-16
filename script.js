@@ -8,100 +8,113 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Event listener
   generateButton.addEventListener("click", () => {
-    flipCard();
-    // generateRandomWord();
-    generateFallbackWord();
+    generateRandomWord();
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.code === "Space") {
-      flipCard();
       generateButton.classList.add("active");
-      // generateRandomWord();
-      generateFallbackWord();
+      generateRandomWord();
       setTimeout(() => {
         generateButton.classList.remove("active");
       }, 100);
     }
   });
 
-  function flipCard() {
+  const flipCard = () => {
     const flipContainer = document.getElementById("flipContainer");
     flipContainer.classList.toggle("flip");
-  }
+  };
 
-  function changeColors() {
+  const changeColors = () => {
     const colors = ["#0266cd", "#e51421", "#dacf00", "#017802"];
-
     const cardColorIndex = Math.floor(Math.random() * colors.length);
     const cardColor = colors[cardColorIndex];
-
     card.style.backgroundColor = cardColor;
-  }
+  };
 
-  function generateRandomWord() {
+  const copyToClipboard = (word) => {
+    navigator.clipboard.writeText(word).then(() => {
+      message.innerHTML = "Copied to clipboard!";
+      setTimeout(() => {
+        message.innerHTML = "";
+      }, 1000);
+    });
+  };
+
+  const generateRandomWord = async () => {
+    flipCard();
     generate.disabled = true;
     word.innerHTML = "";
     definition.innerHTML = "";
     partOfSpeech.innerHTML = "";
 
-    fetch("https://random-word-api.herokuapp.com/word")
-      .then((response) => response.json())
-      .then((data) => {
-        const generatedWord = data[0];
+    let generatedWord = await fetchWord();
 
-        // Fetch the definition of the word
-        fetch(
-          `https://api.dictionaryapi.dev/api/v2/entries/en/${generatedWord}`
-        )
-          .then((response) => response.json())
-          .then((definitionData) => {
-            if (
-              definitionData[0] &&
-              definitionData[0].meanings &&
-              definitionData[0].meanings.length > 0
-            ) {
-              const firstMeaning = definitionData[0].meanings[0];
-              const firstDefinition = firstMeaning.definitions[0].definition;
-              const firstPartOfSpeech = firstMeaning.partOfSpeech;
-              definition.innerHTML = firstDefinition;
-              partOfSpeech.innerHTML = firstPartOfSpeech;
-            } else {
-              definition.innerHTML = "";
-              partOfSpeech.innerHTML = "";
-            }
-            word.innerHTML = generatedWord;
-            changeColors();
-            flipCard();
+    if (generatedWord == null) {
+      generatedWord = generateFallbackWord();
+    }
 
-            // Copy to clipboard
-            navigator.clipboard.writeText(generatedWord).then(() => {
-              message.innerHTML = "Copied to clipboard!";
+    let meaning = await fetchDefinition(generatedWord);
 
-              setTimeout(() => {
-                message.innerHTML = "";
-              }, 1000);
-            });
-          })
-          .catch((error) => {
-            console.error("Error fetching definition:", error);
-            word.innerHTML = "An error occured!";
-            definition.innerHTML = "Error fetching definition.";
-            flipCard();
-          });
-      })
-      .catch((error) => {
-        console.error("Error fetching word:", error);
-        word.innerHTML = "An error occured!";
-        definition.innerHTML = "Error fetching word.";
-        flipCard();
-      })
-      .finally(() => {
-        generate.disabled = false;
-      });
-  }
+    if (meaning) {
+      word.innerHTML = generatedWord;
+      definition.innerHTML = meaning.definition;
+      partOfSpeech.innerHTML = meaning.partOfSpeech;
+    } else {
+      word.innerHTML = generatedWord;
+      definition.innerHTML = "Definition not found.";
+      partOfSpeech.innerHTML = "N/A";
+    }
 
-  function generateFallbackWord() {
+    copyToClipboard(generatedWord);
+    changeColors();
+    flipCard();
+    generate.disabled = false;
+  };
+
+  const fetchWord = async () => {
+    try {
+      const response = await fetch(
+        "https://random-word-api.herokuapp.com/word"
+      );
+      const data = await response.json();
+      return data[0];
+    } catch (error) {
+      console.error("Error fetching word:", error);
+      return null;
+    }
+  };
+
+  const fetchDefinition = async (word) => {
+    try {
+      const response = await fetch(
+        `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
+      );
+      const definitionData = await response.json();
+      if (
+        definitionData[0] &&
+        definitionData[0].meanings &&
+        definitionData[0].meanings.length > 0
+      ) {
+        const firstMeaning = definitionData[0].meanings[0];
+        const firstDefinition = firstMeaning.definitions[0].definition;
+        const firstPartOfSpeech = firstMeaning.partOfSpeech;
+
+        return {
+          definition: firstDefinition,
+          partOfSpeech: firstPartOfSpeech,
+        };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Error fetching definition:", error);
+      return null;
+    }
+  };
+
+  const generateFallbackWord = () => {
     const prefixes = [
       "bio",
       "cyber",
@@ -142,19 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
     const suffix = suffixes[Math.floor(Math.random() * suffixes.length)];
-    const newWord = prefix + suffix;
-
-    word.innerHTML = newWord;
-    changeColors();
-    flipCard();
-
-    // Copy to clipboard
-    navigator.clipboard.writeText(newWord).then(() => {
-      message.innerHTML = "Copied to clipboard!";
-
-      setTimeout(() => {
-        message.innerHTML = "";
-      }, 1000);
-    });
-  }
+    return prefix + suffix;
+  };
 });
