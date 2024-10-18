@@ -14,50 +14,52 @@
   <body>
     <div class="flip-container" id="flipContainer">
       <div class="card">
-        <div class="front">
+        <!-- Front of the card -->
+        <section class="front">
           <div class="border">
-            <div class="container" id="card">
-              <div class="top">
+            <article class="container" id="card">
+              <header class="top">
                 <h2>Random Word Generator</h2>
-              </div>
-              <div class="mid">
+              </header>
+              <section class="mid">
                 <h1 id="word">Random</h1>
                 <p id="partOfSpeech"></p>
                 <p id="definition"></p>
-              </div>
-              <div class="bot">
+              </section>
+              <footer class="bot">
                 <div class="messageContainer">
                   <p id="message"></p>
                 </div>
                 <button id="generate">GENERATE</button>
-              </div>
-            </div>
+              </footer>
+            </article>
           </div>
-        </div>
+        </section>
 
-        <div class="back">
+        <!-- Back of the card -->
+        <section class="back">
           <div class="border">
-            <div class="container container-back">
-              <div class="top">
+            <article class="container container-back">
+              <header class="top">
                 <h2>Random Word Generator</h2>
-              </div>
-              <div class="mid">
+              </header>
+              <section class="mid">
                 <div class="loaderContainer">
                   <div id="loader"></div>
                 </div>
                 <h2>Generating...</h2>
-              </div>
-              <div class="bot">
+              </section>
+              <footer class="bot">
                 <a
                   href="https://github.com/mccedddy/"
                   rel="noopener"
                   target="_blank"
                   >github.com/mccedddy</a
                 >
-              </div>
-            </div>
+              </footer>
+            </article>
           </div>
-        </div>
+        </section>
       </div>
     </div>
 
