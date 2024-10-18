@@ -74,7 +74,7 @@ const generateRandomWord = async () => {
   generate.disabled = false;
 };
 
-const fetchWord = async () => {
+export const fetchWord = async () => {
   try {
     const response = await fetch("https://random-word-api.herokuapp.com/word");
     const data = await response.json();
