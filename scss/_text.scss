@@ -1,0 +1,49 @@
+@use "colors";
+
+$font-stack: "Outfit", "Arial", sans-serif;
+
+h1,
+h2,
+p,
+a {
+  color: colors.$light;
+  font-size: 14px;
+  padding: 0px;
+  margin: 0px;
+  text-shadow: 0px 1px 0 colors.$darker, 0px -1px 0 colors.$darker,
+    -1px 0px 0 colors.$darker, 1px 0px 0 colors.$darker;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 28px;
+  font-family: "Paytone One", $font-stack;
+  text-shadow: 0px 1px 0 colors.$darker, 0px -1px 0 colors.$darker,
+    -1px 0px 0 colors.$darker, 1px 0px 0 colors.$darker,
+    1px 1px 0 colors.$darker, -1px -1px 0 colors.$darker,
+    1px -1px 0 colors.$darker, -1px 1px 0 colors.$darker,
+    4px 4px 0 colors.$darker;
+  white-space: wrap;
+  word-break: break-all;
+}
+
+h2 {
+  margin: 15px 0px 20px 0px;
+  font-size: 18px;
+  text-shadow: 0px 1px 0 colors.$darker, 0px -1px 0 colors.$darker,
+    -1px 0px 0 colors.$darker, 1px 0px 0 colors.$darker,
+    2px 2px 0 colors.$darker;
+}
+
+p {
+  word-wrap: break-word;
+  word-break: break-word;
+  text-wrap: wrap;
+  max-width: 100%;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
