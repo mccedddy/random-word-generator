@@ -1,4 +1,9 @@
-export const fetchWord = async () => {
+type Definition = {
+  definition: string;
+  partOfSpeech: string;
+};
+
+export const fetchWord = async (): Promise<string | null> => {
   try {
     const response = await fetch("https://random-word-api.herokuapp.com/word");
     const data = await response.json();
@@ -9,7 +14,9 @@ export const fetchWord = async () => {
   }
 };
 
-export const fetchDefinition = async (word) => {
+export const fetchDefinition = async (
+  word: string
+): Promise<Definition | null> => {
   try {
     const response = await fetch(
       `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`
@@ -37,7 +44,7 @@ export const fetchDefinition = async (word) => {
   }
 };
 
-export const generateFallbackWord = () => {
+export const generateFallbackWord = (): string => {
   const prefixes = [
     "bio",
     "cyber",

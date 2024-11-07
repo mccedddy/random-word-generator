@@ -2,7 +2,7 @@ const {
   fetchWord,
   fetchDefinition,
   generateFallbackWord,
-} = require("../js/generateWord.js");
+} = require("../js/generateWord.ts");
 
 global.fetch = jest.fn(() =>
   Promise.resolve({

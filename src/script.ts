@@ -2,15 +2,21 @@ import {
   fetchWord,
   fetchDefinition,
   generateFallbackWord,
-} from "./generateWord.js";
+} from "./generateWord.ts";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const generateButton = document.getElementById("generate");
-  const word = document.getElementById("word");
-  const message = document.getElementById("message");
-  const definition = document.getElementById("definition");
-  const partOfSpeech = document.getElementById("partOfSpeech");
-  const card = document.getElementById("card");
+  const generateButton = document.getElementById(
+    "generate"
+  ) as HTMLButtonElement;
+  const word = document.getElementById("word") as HTMLParagraphElement;
+  const message = document.getElementById("message") as HTMLParagraphElement;
+  const definition = document.getElementById(
+    "definition"
+  ) as HTMLParagraphElement;
+  const partOfSpeech = document.getElementById(
+    "partOfSpeech"
+  ) as HTMLParagraphElement;
+  const card = document.getElementById("card") as HTMLElement;
 
   generateButton.addEventListener("click", () => {
     generateRandomWord();
@@ -27,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   const flipCard = () => {
-    const flipContainer = document.getElementById("flipContainer");
+    const flipContainer = document.getElementById(
+      "flipContainer"
+    ) as HTMLElement;
     flipContainer.classList.toggle("flip");
   };
 
@@ -38,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     card.style.backgroundColor = cardColor;
   };
 
-  const copyToClipboard = (word) => {
+  const copyToClipboard = (word: string) => {
     navigator.clipboard.writeText(word).then(() => {
       message.innerHTML = "Copied to clipboard!";
       setTimeout(() => {
@@ -49,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const generateRandomWord = async () => {
     flipCard();
-    generate.disabled = true;
+    generateButton.disabled = true;
     word.innerHTML = "";
     definition.innerHTML = "";
     partOfSpeech.innerHTML = "";
@@ -75,6 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
     copyToClipboard(generatedWord);
     changeColors();
     flipCard();
-    generate.disabled = false;
+    generateButton.disabled = false;
   };
 });
